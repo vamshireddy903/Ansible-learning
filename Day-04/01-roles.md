@@ -61,6 +61,9 @@ An Ansible role follows a specific directory structure:
       └── main.yml
 ```
 
+<img width="1112" height="676" alt="image" src="https://github.com/user-attachments/assets/491875d2-8ac8-4cbb-897a-e766f0187e51" />
+
+
 ## Why Use Ansible Roles?
 
 ### Modularity
