@@ -1,4 +1,4 @@
-# Ansible Zero to Hero
+# Ansible 
 
 Day 1: Introduction to Ansible and Getting Started
 
