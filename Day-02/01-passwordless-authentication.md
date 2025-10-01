@@ -64,3 +64,48 @@ ssh ubuntu@<server-ip>        # connect without specifying -i
 ```
 
 ⚠️ By default, keys are only loaded for the current WSL session. If you open a new terminal, you’ll need to run ssh-add again unless you automate it.
+
+# Steps to Auto-Load Your Key in WSL
+# 1. Start ssh-agent automatically
+
+Edit your ~/.bashrc (or ~/.zshrc if you use zsh):
+
+     sudo vim ~/.bashrc
+
+Add this at the end of the file:
+
+# Start ssh-agent if not already running
+
+    eval "$(ssh-agent -s)" > /dev/null 2>&1
+
+# 2. Auto-add your key
+
+Right after that line, add:
+
+# Add AWS/Ansible private key
+
+    ssh-add -q ~/ansible.pem 2>/dev/null
+
+-q = quiet mode (no output).
+
+2>/dev/null = suppress errors if the key is already added.
+
+# 3. Reload your shell
+
+    source ~/.bashrc
+
+# 4. Verify
+
+Check that the key is loaded:
+
+     ssh-add -l
+
+You should see your key fingerprint.
+
+**⚠️ Important Notes**
+
+Make sure your .pem file has correct permissions:
+
+    chmod 400 ~/ansible.pem
+    
+If you restart your WSL instance completely, it will restart ssh-agent and re-add the key (because of .bashrc).
